@@ -1,2 +1,2 @@
 # Kinect-Beam-Tracker-System
-A system for the tracking of a red laser pointer on a screen using a Microsoft Kinect v1
+A system for the tracking of a ir laser pointer on a screen using a Microsoft Kinect v1
