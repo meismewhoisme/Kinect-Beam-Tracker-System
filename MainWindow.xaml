@@ -1,0 +1,61 @@
+﻿<Window x:Class="Microsoft.Samples.Kinect.InfraredBasics.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Infrared Basics" Height="655.77" Width="933.016" Loaded="WindowLoaded" Closing="WindowClosing">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e"/>
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f"/>
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2"/>
+    </Window.Resources>
+
+    <Grid Name="layoutGrid" Margin="10 0 10 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Margin="0 0 0 20">
+            <Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5"/>
+            <TextBlock DockPanel.Dock="Right" Margin="0 0 -1 0" VerticalAlignment="Bottom" Foreground="{StaticResource MediumGreyBrush}" FontFamily="Segoe UI" FontSize="18">Infrared Basics</TextBlock>
+            <Image Source="Images\Status.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5"/>
+            <TextBlock Name ="OutputBox" Height="27" Margin="0,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="68"/>
+        </DockPanel>
+        <Viewbox Grid.Row="1"  HorizontalAlignment="Center" Margin="146,0,219,111" Width="540">
+            <Image Name="Image" Width="320" Height="240"/>
+        </Viewbox>
+        <Button Grid.Row="2"  Content="Screenshot" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10" Name="buttonScreenshot"  Click="ButtonScreenshotClick" />
+        <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+            <StatusBarItem Padding="0 0 0 10">
+                <TextBlock Name="statusBarText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <Image HorizontalAlignment="Left" Height="134" Margin="10,180,0,0" Grid.Row="1" VerticalAlignment="Top" Width="146" Name="Img"/>
+        <StackPanel Margin="0,411,0,10" Grid.Row="1" Grid.RowSpan="2">
+            <GroupBox Margin="5" Header="Serial Connection">
+                <Border Background="LightBlue" Padding="7" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Padding="7">Available serial ports:</Label>
+                        <ComboBox Name="SerialPortNamesCmbBox" Grid.Column="1" Margin="5"></ComboBox>
+                        <Button Name="RefreshBtn" Grid.Column="2" Margin="5" Padding="7,0,7,0" 
+                            Background="LightGreen" Width="100" Click="RefreshBtn_Click">Refresh</Button>
+                        <Button Name="SerialPortConnectBtn" Grid.Column="3" Margin="5"
+                            Padding="7,0,7,0" Background="Aqua" Width="100"
+                            Click="SerialPortConnectBtn_Click">Connect</Button>
+                    </Grid>
+                </Border>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
