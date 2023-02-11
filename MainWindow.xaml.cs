@@ -215,8 +215,8 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             // give script location
             var script = @"C:\Users\geive\Desktop\engineering y12\Code\Made\Proof of Ideas\Python Mouse Control\Mousemover.py";
             // give inputs to script
-            var pysource = @"C:\Users\geive\Desktop\engineering y12\Code\Made\Edited IR basics\Images\For Analysis\IR_Unaltered.png";
-            var pyrad = "11";
+            
+            
 
             Global.results = Global.results.Remove(Global.results.Length - 3, 3);
             Global.results = Global.results.Remove(0, 1);
@@ -351,7 +351,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
             string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
-            string StorageLoc = @"C:\Users\geive\Desktop\engineering y12\Code\Made\Edited IR basics\Images\For Analysis";
+            string StorageLoc = @"Images";
 
             string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
 
