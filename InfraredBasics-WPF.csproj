@@ -101,6 +101,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Python\Brightest_point_detect.py" />
+    <None Include="Python\Mousemover.py" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Kinect.ico" />
@@ -108,7 +110,10 @@
     <Resource Include="Images\Status.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
+    <Resource Include="Images\For_Analysis\IR_Unaltered.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Analysed\Done.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
