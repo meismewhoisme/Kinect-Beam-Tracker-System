@@ -20,6 +20,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
 
 
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -163,13 +164,13 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             // create process info
             var ImageProcessor = new ProcessStartInfo();
-            ImageProcessor.FileName = @"C:\Users\geive\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0/python3.exe";
+            ImageProcessor.FileName = @"C:\Users\1089510\AppData\Local\Microsoft\WindowsApps\python3.exe";
 
             // Provide Script and arguments
             // give script location
-            var script = @"C:\Users\geive\Desktop\engineering y12\Code\Made\Proof of Ideas\Open CV\Brightest_point_detect.py";
+            var script = @"Python\Brightest_point_detect.py";
             // give inputs to script
-            var pysource = @"C:\Users\geive\Desktop\engineering y12\Code\Made\Edited IR basics\Images\For Analysis\IR_Unaltered.png";
+            var pysource = @"Images\For_Analysis\IR_Unaltered.png";
             var pyrad = "11";
 
             //combine
@@ -209,17 +210,18 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             // create process info
             var MouseProcessing = new ProcessStartInfo();
-            MouseProcessing.FileName = @"C:\Users\geive\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0/python3.exe";
+            MouseProcessing.FileName = @"C:\Users\1089510\AppData\Local\Microsoft\WindowsApps\python3.exe";
 
             // Provide Script and arguments
             // give script location
-            var script = @"C:\Users\geive\Desktop\engineering y12\Code\Made\Proof of Ideas\Python Mouse Control\Mousemover.py";
+            var script = @"Python\Mousemover.py";
             // give inputs to script
             
             
 
             Global.results = Global.results.Remove(Global.results.Length - 3, 3);
             Global.results = Global.results.Remove(0, 1);
+            //Int32 splat = 2; hello geive i was here 2023 code tag break
             Int32 splat = 2;
             String[] separator = { ", ", "(" , ")\r\n" };
             string[] res = Global.results.Split(separator, splat,
@@ -285,6 +287,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
                 serialPort.Open();
                 SerialPortConnectBtn.Content = "Disconnect";
                 isConnectedToArduino = true;
+                MessageBox.Show($"connetion to {selectedSerialPort} was succesful", "Succesful Connection", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (UnauthorizedAccessException)
             {
@@ -351,7 +354,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
             string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
-            string StorageLoc = @"Images";
+            string StorageLoc = @"Images\For_Analysis\";
 
             string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
 
@@ -383,6 +386,6 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             Img.Source = Checked;
             */
             
-        }
+        }//
     }
 }
