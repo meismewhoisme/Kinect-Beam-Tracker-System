@@ -42,7 +42,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         /// Intermediate storage for the color data received from the camera
         /// </summary>
         private byte[] colorPixels;
-        
+
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -80,7 +80,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
                 }
             }
 
-            
+
 
             if (null != this.sensor)
             {
@@ -115,7 +115,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
                 this.statusBarText.Text = Properties.Resources.NoKinectReady;
             }
 
-            
+
         }
 
         /// <summary>
@@ -201,9 +201,10 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             // output
 
 
-            
+
             OutputBox.Text = Global.results;
             MouseMover();
+            
         }
 
         private void MouseMover()
@@ -216,14 +217,14 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             // give script location
             var script = @"Python\Mousemover.py";
             // give inputs to script
-            
-            
+
+
 
             Global.results = Global.results.Remove(Global.results.Length - 3, 3);
             Global.results = Global.results.Remove(0, 1);
             //Int32 splat = 2; hello geive i was here 2023 code tag break
             Int32 splat = 2;
-            String[] separator = { ", ", "(" , ")\r\n" };
+            String[] separator = { ", ", "(", ")\r\n" };
             string[] res = Global.results.Split(separator, splat,
                StringSplitOptions.RemoveEmptyEntries);
 
@@ -288,6 +289,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
                 SerialPortConnectBtn.Content = "Disconnect";
                 isConnectedToArduino = true;
                 MessageBox.Show($"connetion to {selectedSerialPort} was succesful", "Succesful Connection", MessageBoxButton.OK, MessageBoxImage.Information);
+                serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(port_DataReceived_1);
             }
             catch (UnauthorizedAccessException)
             {
@@ -306,7 +308,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         private void DisconnectFromArduino()
         {
             SerialPortConnectBtn.Content = "Connect";
-            
+
             isConnectedToArduino = false;
             ResetControl();
             serialPort.Close();
@@ -314,7 +316,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
         private void ResetControl()
         {
-            
+
         }
 
         private void SerialPortConnectBtn_Click(object sender, RoutedEventArgs e)
@@ -338,6 +340,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
         private void ButtonScreenshotClick(object sender, RoutedEventArgs e)
         {
+            
             if (null == this.sensor)
             {
                 this.statusBarText.Text = Properties.Resources.ConnectDeviceFirst;
@@ -358,8 +361,8 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
             string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
 
-            
-            
+
+
 
             // write the new file to disk
             try
@@ -369,7 +372,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
                     encoder.Save(fs);
                 }
 
-               
+
             }
             catch (IOException)
             {
@@ -378,14 +381,23 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             ImageProcessing();
 
             // broken code for displaying the screenshot (is unnecessary)
-            /*
-            BitmapImage Checked = new BitmapImage();
-            Checked.BeginInit();
-            Checked.UriSource = new Uri(@"C:\Users\geive\Desktop\engineering y12\Code\Made\Edited IR basics\Images\Analysed\Done.png");
-            Checked.EndInit();
-            Img.Source = Checked;
-            */
-            
+
+
         }//
+        string InputData;
+
+        private void port_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
+        {
+            InputData = serialPort.ReadLine();
+            
+            if (InputData == "run")
+            {
+                ImageProcessing();
+            }
+            
+
+        }
     }
 }
+
+
