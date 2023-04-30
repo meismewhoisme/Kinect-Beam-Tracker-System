@@ -379,6 +379,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
             }
             ImageProcessing();
+            MessageBox.Show($"brightest point at {Global.results}", "Brightest Point", MessageBoxButton.OK, MessageBoxImage.Information);
 
             // broken code for displaying the screenshot (is unnecessary)
 
