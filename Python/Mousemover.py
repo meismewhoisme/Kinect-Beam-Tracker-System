@@ -47,16 +47,21 @@ args = vars(ap.parse_args())
 x = args["X_Coordinate"]
 y = args["Y_Coordinate"]
 
-x = x/640 
+screen_width = 640
+screen_height = 480
+
+
+x = x/screen_width
+y = y/screen_height
+
 
 x = x * monwidth
-x = round(x)
-print("x pos: " + str(x) )
-
-#y = 480 - y
-y = y/480 
 y = y * monheight
+
+x = round(x)
 y = round(y)
+
+print("x pos: " + str(x) )
 print("y pos: " + str(y) )
 
 mouse.move(x, y, absolute=True, duration=0)
