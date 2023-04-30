@@ -28,10 +28,33 @@ y = args["Y_Coordinate"]
 
 
 try:
-    x_pos_start = 0
-    x_pos_end = 640
-    y_pos_start = 0
-    y_pos_end = 480
+
+    import configparser
+
+
+    # creating the object of configparser
+    config_data = configparser.ConfigParser()
+
+
+    # reading data
+    config_data.read("config/config.ini")
+
+
+    # app configuration data
+    mouse_movement = config_data["mouse_movement"]
+
+
+    print("mouse_movement data")
+    for mouse_movement_data in mouse_movement:
+        print(f"{mouse_movement_data} = {mouse_movement.get(mouse_movement_data)}")
+        if mouse_movement_data == "x_start_pos":
+            x_start_pos = mouse_movement.get(mouse_movement_data)
+        elif mouse_movement_data == "x_end_pos":
+            x_end_pos = mouse_movement.get(mouse_movement_data)
+        elif mouse_movement_data == "y_start_pos":
+            y_start_pos = mouse_movement.get(mouse_movement_data)
+        elif mouse_movement_data == "y_end_pos":
+            y_end_pos = mouse_movement.get(mouse_movement_data)
 
     cam_width = x_pos_end - x_pos_start 
     cam_height = y_pos_end - y_pos_start
