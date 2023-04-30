@@ -49,7 +49,7 @@ try:
             x_pos_start = int(mouse_movement.get(mouse_movement_data))
         elif mouse_movement_data == "x_end_pos":
             x_pos_end = int(mouse_movement.get(mouse_movement_data))
-        elif mouse_movement_data == "y_start_pos":
+        elif mouse_movement_data == "y_start_pos": 
             y_pos_start = int(mouse_movement.get(mouse_movement_data))
         elif mouse_movement_data == "y_end_pos":
             y_pos_end = int(mouse_movement.get(mouse_movement_data))
