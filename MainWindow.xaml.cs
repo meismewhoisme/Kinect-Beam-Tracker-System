@@ -194,7 +194,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
 
             using (var process = Process.Start(ImageProcessor))
-            {
+            { 
                 errors = process.StandardError.ReadToEnd();
                 Global.results = process.StandardOutput.ReadToEnd();
             }
@@ -344,7 +344,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             if (null == this.sensor)
             {
                 this.statusBarText.Text = Properties.Resources.ConnectDeviceFirst;
-                return;
+                //return;
             }
 
             // create a png bitmap encoder which knows how to save a .png file
