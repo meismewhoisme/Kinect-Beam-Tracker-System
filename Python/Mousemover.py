@@ -3,6 +3,7 @@ import argparse
 import inspect
 import ctypes
 
+# A GitHub Change
 #used to find screen size, ensure resolution scaling is diabled
 user32 = ctypes.windll.user32
 screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
