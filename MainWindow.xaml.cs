@@ -201,8 +201,11 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             // output
 
 
-
-            OutputBox.Text = Global.results;
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke((Action)(() =>
+            {
+               OutputBox.Text = Global.results;
+            }));
+            
             MouseMover();
             
         }
