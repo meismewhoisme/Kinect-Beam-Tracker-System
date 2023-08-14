@@ -164,7 +164,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             // create process info
             var ImageProcessor = new ProcessStartInfo();
-            ImageProcessor.FileName = @"C:\Users\1089510\AppData\Local\Microsoft\WindowsApps\python3.exe";
+            ImageProcessor.FileName = @"C:\Users\Geive\AppData\Local\Microsoft\WindowsApps\python3.exe";
 
             // Provide Script and arguments
             // give script location
@@ -201,8 +201,11 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             // output
 
 
-
-            OutputBox.Text = Global.results;
+            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke((Action)(() =>
+            {
+               OutputBox.Text = Global.results;
+            }));
+            
             MouseMover();
             
         }
@@ -211,7 +214,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             // create process info
             var MouseProcessing = new ProcessStartInfo();
-            MouseProcessing.FileName = @"C:\Users\1089510\AppData\Local\Microsoft\WindowsApps\python3.exe";
+            MouseProcessing.FileName = @"C:\Users\Geive\AppData\Local\Microsoft\WindowsApps\python3.exe";
 
             // Provide Script and arguments
             // give script location
