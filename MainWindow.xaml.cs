@@ -200,11 +200,21 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             }
             // output
 
-
-            System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke((Action)(() =>
+            try
             {
-               OutputBox.Text = Global.results;
-            }));
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke((Action)(() =>
+                {
+                    OutputBox.Text = Global.results;
+                }));
+            }
+            catch (Exception e) {
+                this.Dispatcher.Invoke(() =>
+                    {
+                        OutputBox.Text = Global.results;
+                    });
+                
+
+            }
             
             MouseMover();
             
@@ -260,7 +270,22 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
 
 
-            OutputBox.Text = results;
+            try
+            {
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.Invoke((Action)(() =>
+                {
+                    OutputBox.Text = results;
+                }));
+            }
+            catch (Exception e)
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    OutputBox.Text = results;
+                });
+
+
+            }
         }
 
         private void InitializeSerialPorts()
@@ -351,6 +376,22 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             }
 
             // create a png bitmap encoder which knows how to save a .png file
+            takepic();
+
+
+
+
+            // write the new file to disk
+            MessageBox.Show($"brightest point at {Global.results}", "Brightest Point", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // broken code for displaying the screenshot (is unnecessary)
+
+
+        }//
+        string InputData;
+
+        private void takepic()
+        {
             BitmapEncoder encoder = new PngBitmapEncoder();
 
             // create frame from the writable bitmap and add to encoder
@@ -364,42 +405,29 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
             string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
 
-
-
-
-            // write the new file to disk
-            try
-            {
+            
                 using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
                     encoder.Save(fs);
                 }
 
 
-            }
-            catch (IOException)
-            {
-
-            }
+            
             ImageProcessing();
-            MessageBox.Show($"brightest point at {Global.results}", "Brightest Point", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            // broken code for displaying the screenshot (is unnecessary)
-
-
-        }//
-        string InputData;
+        }
 
         private void port_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
             InputData = serialPort.ReadLine();
-            
-            if (InputData == "run")
+
+            /*
+            if (InputData == "r")
             {
                 ImageProcessing();
             }
-            
-
+            */
+            takepic();
         }
     }
 }
