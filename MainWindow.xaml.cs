@@ -17,6 +17,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
     using System.Threading;
     using System.IO.Ports;
     using System.Linq;
+    using System.Windows.Controls;
 
 
 
@@ -376,22 +377,6 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             }
 
             // create a png bitmap encoder which knows how to save a .png file
-            takepic();
-
-
-
-
-            // write the new file to disk
-            MessageBox.Show($"brightest point at {Global.results}", "Brightest Point", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            // broken code for displaying the screenshot (is unnecessary)
-
-
-        }//
-        string InputData;
-
-        private void takepic()
-        {
             BitmapEncoder encoder = new PngBitmapEncoder();
 
             ImageProcessing();
@@ -407,29 +392,39 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
             string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
 
-            
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    encoder.Save(fs);
-                }
+
+            using (FileStream fs = new FileStream(path, FileMode.Create))
+            {
+                encoder.Save(fs);
+            }
 
 
-            
+
             ImageProcessing();
 
-        }
+
+
+
+
+            // write the new file to disk
+            MessageBox.Show($"brightest point at {Global.results}", "Brightest Point", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // broken code for displaying the screenshot (is unnecessary)
+
+
+        }//
+        string InputData;
+
 
         private void port_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
             InputData = serialPort.ReadLine();
-
-            /*
-            if (InputData == "r")
+            this.Dispatcher.Invoke(() =>
             {
-                ImageProcessing();
-            }
-            */
-            takepic();
+                buttonScreenshot.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            });
+
+            
         }
     }
 }
