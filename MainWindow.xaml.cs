@@ -394,6 +394,8 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             BitmapEncoder encoder = new PngBitmapEncoder();
 
+            ImageProcessing();
+
             // create frame from the writable bitmap and add to encoder
             encoder.Frames.Add(BitmapFrame.Create(this.colorBitmap));
 
