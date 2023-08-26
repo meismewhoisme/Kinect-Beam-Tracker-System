@@ -17,6 +17,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
     using System.Threading;
     using System.IO.Ports;
     using System.Linq;
+    using System.Windows.Controls;
 
 
 
@@ -194,7 +195,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
 
             using (var process = Process.Start(ImageProcessor))
-            { 
+            {
                 errors = process.StandardError.ReadToEnd();
                 Global.results = process.StandardOutput.ReadToEnd();
             }
@@ -207,17 +208,18 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
                     OutputBox.Text = Global.results;
                 }));
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 this.Dispatcher.Invoke(() =>
-                    {
-                        OutputBox.Text = Global.results;
-                    });
-                
+                {
+                    OutputBox.Text = Global.results;
+                });
+
 
             }
-            
+
             MouseMover();
-            
+
         }
 
         private void MouseMover()
@@ -368,7 +370,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
 
         private void ButtonScreenshotClick(object sender, RoutedEventArgs e)
         {
-            
+
             if (null == this.sensor)
             {
                 this.statusBarText.Text = Properties.Resources.ConnectDeviceFirst;
@@ -376,7 +378,29 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
             }
 
             // create a png bitmap encoder which knows how to save a .png file
-            takepic();
+            BitmapEncoder encoder = new PngBitmapEncoder();
+
+            // create frame from the writable bitmap and add to encoder
+            encoder.Frames.Add(BitmapFrame.Create(this.colorBitmap));
+
+            string time = System.DateTime.Now.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
+
+            string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+            string StorageLoc = @"Images\For_Analysis\";
+
+            string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
+
+
+            using (FileStream fs = new FileStream(path, FileMode.Create))
+            {
+                encoder.Save(fs);
+            }
+
+
+
+            ImageProcessing();
+
 
 
 
@@ -390,46 +414,16 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         }//
         string InputData;
 
-        private void takepic()
-        {
-            BitmapEncoder encoder = new PngBitmapEncoder();
-
-            ImageProcessing();
-
-            // create frame from the writable bitmap and add to encoder
-            encoder.Frames.Add(BitmapFrame.Create(this.colorBitmap));
-
-            string time = System.DateTime.Now.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
-
-            string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-
-            string StorageLoc = @"Images\For_Analysis\";
-
-            string path = Path.Combine(StorageLoc, "IR_Unaltered" + ".png");
-
-            
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    encoder.Save(fs);
-                }
-
-
-            
-            ImageProcessing();
-
-        }
 
         private void port_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
             InputData = serialPort.ReadLine();
-
-            /*
-            if (InputData == "r")
+            this.Dispatcher.Invoke(() =>
             {
-                ImageProcessing();
-            }
-            */
-            takepic();
+                buttonScreenshot.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            });
+
+
         }
     }
 }
