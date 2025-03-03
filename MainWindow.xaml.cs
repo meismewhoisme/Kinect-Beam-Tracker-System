@@ -226,7 +226,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             // create process info
             var MouseProcessing = new ProcessStartInfo();
-            MouseProcessing.FileName = @"C:\Users\Geive\AppData\Local\Microsoft\WindowsApps\python3.exe";
+            MouseProcessing.FileName = @"_______________________"; // the place where the mouse movement script is stored.
 
             // Provide Script and arguments
             // give script location
