@@ -165,7 +165,7 @@ namespace Microsoft.Samples.Kinect.InfraredBasics
         {
             // create process info
             var ImageProcessor = new ProcessStartInfo();
-            ImageProcessor.FileName = @"C:\Users\Geive\AppData\Local\Microsoft\WindowsApps\python3.exe";
+            ImageProcessor.FileName = @"_____________________________"; // the name of the place the file will be stored once the image has been taken.
 
             // Provide Script and arguments
             // give script location
