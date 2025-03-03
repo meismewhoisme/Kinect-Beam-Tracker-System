@@ -13,7 +13,8 @@ args = vars(ap.parse_args())
 # load the image and convert it to grayscale
 
 ##### brightest point without any gaussian blur#########
-image = cv2.imread(args["image"])
+image = cv2.imread(args["image"]) # uses the command that opened it to input the images location.
+
 orig = image.copy()
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # perform a naive attempt to find the (x, y) coordinates of
@@ -40,8 +41,9 @@ cv2.circle(image, maxLoc, args["radius"], (255, 0, 0), 2)
 #cv2.waitKey(0)
 
 print(maxLoc)
+# prints the maximum location  to the cmd prompt
 
 
 
-filename = r"C:\Users\geive\Desktop\engineering y12\Code\Made\Edited IR basics\Images\Analysed\Done.png"
+filename = r"___________________________________" # write the location that you would like the new file to be written to
 cv2.imwrite(filename, image)
